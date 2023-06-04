@@ -1,0 +1,48 @@
+<div class="card mx-auto">
+  <div class="card-header">
+    <p class="text-muted"><%= post.created_at %></p>
+    <h5 class="card-title">Beitrag von <%= post.user.username %></h5>
+    <% if current_user == post.user %>
+      <ul class="nav card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" data-method="delete" 
+                       data-confirm="Are you sure"
+                       href="<%= user_post_url(@user, post) %>">Löschen
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+                       href="<%= edit_user_post_path(@user, post) %>">
+                       Bearbeiten
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">kommentare deaktivieren</a>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= post.title %></h5>
+    <p class="card-text"><%= post.body %></p>
+  </div>
+  <div class="card-footer">
+    <a href="<%= post_url(post) %>" class="btn btn-primary">like</a>
+    <a href="<%= new_post_comment_path(@post) %>" class="btn btn-primary">Kommentieren</a>
+  </div>
+</div>
+<br>
+
+<% if post.comments.any? %>
+  <h4>Kommentare</h4>
+<% else %>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Zurzeit keine Kommentare!</h5>
+      <p class="card-text">Ersten Kommentar schreiben?</p>
+      <a href="<%= new_post_comment_path(@post) %>" class="btn btn-primary">Kommentieren</a>
+    </div>
+  </div>
+<%end%>
+
+<%= render_if post.comments.any?, post.comments %>

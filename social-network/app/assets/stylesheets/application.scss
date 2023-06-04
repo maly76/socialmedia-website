@@ -1,0 +1,10 @@
+//= require actiontext
+
+@import "bootstrap";
+@import "./actiontext.scss";
+@import "trix/dist/trix";
+@import "rails_bootstrap_forms";
+
+.login-info {
+    margin-left: 1300px;
+}

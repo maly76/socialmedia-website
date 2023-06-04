@@ -1,0 +1,37 @@
+<%= form_with(model: [@user, post]) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="text-field">
+    <div class="input-label">
+      <%= form.label :title %>
+    </div>
+    <div class="text-field">
+      <%= form.text_field :title %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.rich_text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :onlyForFriends %>
+    <%= form.check_box :onlyForFriends %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <%= link_to 'Back', user_posts_path(@user, @user.posts) %>
+<% end %>
+

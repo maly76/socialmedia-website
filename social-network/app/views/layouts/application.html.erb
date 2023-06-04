@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SocialNetwork</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Social Network</a>
+      <div id="navbarNavAltMarkup" id="navbarText">
+        <div class="navbar-nav">
+          <% if signed_in? %>
+            <a class="nav-item nav-link active" href="/">Home</a>
+            <a class="nav-item nav-link" href="<%= user_posts_path(current_user) %>">Beiträge</a>
+            <a class="nav-item nav-link" href="<%= edit_user_profile_url(current_user, current_user.profile) %>">Profile</a>
+            <a class="nav-item nav-link" href="<%= friendships_path %>">Freunde</a>
+            <a class="nav-item nav-link login-info" disabled>Angemeldet als <%= current_user.profile.username %></a>
+            <a class="nav-item nav-link"><%= button_to "Abmelden", sign_out_path, method: :delete %></a>
+          <% else %>
+            <%= link_to "Anmelden", sign_in_path %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <section class="content">
+      <main class='<%= controller.controller_name %>'>
+        <%= yield %>
+      </main>
+    </section>
+  </body>
+</html>

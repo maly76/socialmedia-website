@@ -1,0 +1,73 @@
+<%= bootstrap_form_for @user do |form| %>
+  <% if flash[:notice].present? %>
+    <div class="alert alert-info">
+      <span class="glyphicon glyphicon-info-sign"></span>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger">
+      <span class="glyphicon glyphicon-exclamation-sign"></span>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <span class="glyphicon glyphicon-info-sign"><%= pluralize(@user.errors.count, "error") %></span>
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+            alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form>
+            <div class="d-flex align-items-center mb-3 pb-1">
+              <span class="h1 fw-bold mb-0">SIGN UP</span>
+            </div>
+            <div class="form-outline mb-4">
+              <%= form.text_field :email, type: 'email', placeholder: "E-Mail eingeben", label: "Neue E-Mail", :class => 'form-control form-control-lg' %>
+            </div>
+
+            <div class="form-outline mb-3">
+              <%= form.password_field :password, placeholder: "Kennwort eingeben", label: "Neues Kennwort", :class => 'form-control form-control-lg' %>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="form-check mb-0">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                <label class="form-check-label" for="form2Example3">
+                  Remember me
+                </label>
+              </div>
+            </div>
+
+            <% if Clearance.configuration.allow_sign_up? %>
+              <div class="text-center text-lg-start mt-4 pt-2">
+                  <%= form.submit "Registrieren" %>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Sie haben bereits ein Konto? 
+                  <a href="<%= sign_in_path %>"
+                    class="link-danger">Anmelden
+                  </a>
+                </p>
+              </div>
+            <% end %>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    </div>
+  </section>
+<% end %>

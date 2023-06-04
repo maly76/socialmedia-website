@@ -1,0 +1,35 @@
+
+
+<br>
+<br>
+<div class="p-16 bg-surface-secondary">
+    <div class="row">
+        <div class="col-lg-4 mx-auto">
+            <div class="card shadow">
+                <div class="card-body">
+                  <div class="d-flex justify-content-center"> 
+                      <a href="#" class="avatar avatar-xl rounded-circle">
+                      <%= image_tag(friendship_request.from_user.profile.imageurl, :size => "260x260", :class => "rounded-circle mt-5") %>
+                      </a> 
+                  </div>
+                  <div class="text-center my-6">
+                      <a href="#" class="d-block h5 mb-0"><%= friendship_request.from_user.profile.fullname %></a>
+                      <span class="d-block text-sm text-muted"><%= friendship_request.from_user.profile.user.email %></span> 
+                  </div>
+                  <div class="d-flex">
+                      <div class="col-6 text-center"> 
+                      <a href="<%= user_posts_url(friendship_request.from_user, friendship_request.from_user.profile) %>" class="h4 font-bolder mb-0"><%= friendship_request.from_user.posts.length %></a> <span class="d-block text-sm">Beiträge</span> </div>
+                      <div class="col-6 text-center"> <a class="h4 font-bolder mb-0"><%= friendship_request.from_user.friendships.length %></a> <span class="d-block text-sm">Freunde</span> </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <%= link_to 'Ablehnen',
+                        friendship_request,
+                        method: :delete,
+                        :class => 'btn btn-danger' %>
+                      <%= button_to "Annehmen", friendships_path(friendship_request_id: friendship_request), remote: true, :class => 'btn btn-primary' %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

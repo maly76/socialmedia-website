@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <% if signed_in? %>
+          <%= current_user.email %>
+          <%= button_to "Abmelden", sign_out_path, method: :delete %>
+        <% else %>
+          <%= link_to "Anmelden", sign_in_path %>
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarToggleExternalContent" 
+                aria-controls="navbarToggleExternalContent" 
+                aria-expanded="false" aria-label="Toggle navigation"
+                >
+          <span class="navbar-toggler-icon">Home</span>
+        </button>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarToggleExternalContent" 
+                aria-controls="navbarToggleExternalContent" 
+                aria-expanded="false" aria-label="Toggle navigation"
+                >
+          <span class="navbar-toggler-icon">Dashboard</span>
+        </button>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarToggleExternalContent" 
+                aria-controls="navbarToggleExternalContent" 
+                aria-expanded="false" aria-label="Toggle navigation"
+                >
+          <span class="navbar-toggler-icon">Profil</span>
+        </button>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarToggleExternalContent" 
+                aria-controls="navbarToggleExternalContent" 
+                aria-expanded="false" aria-label="Toggle navigation"
+                >
+          <span class="navbar-toggler-icon">Freunde</span>
+        </button>
+      </div>
+    </nav>
+
+    <section class="content">
+      <main class='<%= controller.controller_name %>'>
+        <%= yield %>
+      </main>
+    </section>
+  </body>
+</html>

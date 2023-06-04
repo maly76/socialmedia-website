@@ -1,0 +1,59 @@
+
+
+<%= bootstrap_form_for([@user, profile]) do |form| %>
+  <%= form.alert_message "Bitte vollständigen Sie Ihre Daten!" %>
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <%= image_tag("unknown.jpg", :size => "260x260", :class => "rounded-circle mt-5") %>
+            <span class="font-weight-bold"><%= profile.username %></span>
+            <span class="text-black-50"><%= profile.user.email %></span>
+            <span> </span>
+          </div>
+      </div>
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Profileeinstellungen</h4>
+          </div>
+          <div class="row mt-2">
+              <div class="col-md-6">
+                <%= form.text_field :fullname, placeholder: "Name", label: "Name" %>
+              </div>
+              <div class="col-md-6">
+                <%= form.text_field :username, placeholder: "Benutzername", label: "Benutzername" %>
+              </div>
+          </div>
+          <div class="row mt-3">
+              <div class="col-md-12">
+                <%= form.text_field :phone_number, help: "Nur Sie sehen das", placeholder: "Telefonnummer", label: "Telefonnummer" %>
+              </div>
+              <div class="col-md-12">
+                <%= form.text_field :country, placeholder: "Land", label: "Land" %>
+                <%= form.text_field :street, placeholder: "Straße", help: "Nur Sie sehen das", label: "Straße" %>
+              </div>
+              <div class="col-md-12">
+                <%= form.text_field :city, placeholder: "Stadt", help: "Nur Sie sehen das", label: "Stadt" %>
+              </div>
+              <div class="col-md-12">
+                <%= form.text_field :imageurl, placeholder: "Geben sie den Namen des Bildes ein", label: "Profilebild" %>
+              </div>
+              <div class="col-md-12">
+                <%= form.date_field :birthday, label: "Geburtsdatum" %>
+              </div>
+              <div class="col-md-12">
+                <%= form.check_box :onlyForFriends, label: "Beiträge nur bei Freunden anzeigen" %>
+              </div>
+          </div>
+          <div class="mt-5 text-center">
+            <%= form.submit "Speichern" %>
+            <a type="button" href="/" class="btn btn-danger">Abbrechen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+<% end %>

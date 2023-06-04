@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Freunde</h1>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Home</div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Profile</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>
+
+<div class="card-deck">
+  
+  <% @friends.each do |friend| %>
+    <div class="card" style="max-width: 600px;">
+      <div class="row no-gutters">
+          <div class="col-md-5">
+            <%= image_tag(friend.profile.imageurl, :size => "120x120", class: 'rounded-circle') %> 
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title"><%= friend.profile.username %></h5>
+              <p class="card-text">Hat <%= friend.posts.length %> Beiträge</p>
+              <a href="<%= user_profile_url(friend, friend.profile) %>" class="btn btn-info">Profil</a>
+              <a href="#" class="btn btn-primary">Beiträge</a>
+              <a class="btn btn-primary btn-danger" data-method="delete"
+                              data-confirm="Sind Sie sicher?"
+                              href="/">Freund entfernen</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  <% end %>
+  
+</div>

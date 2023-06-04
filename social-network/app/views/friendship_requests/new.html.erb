@@ -1,0 +1,29 @@
+<h1>New Friendship Request</h1>
+
+<%= render 'form', friendship_request: @friendship_request %>
+
+<%= link_to 'Back', friendship_requests_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>From user</th>
+      <th>To user</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friendship_requests.each do |friendship_request| %>
+      <tr>
+        <td><%= friendship_request.from_user_id %></td>
+        <td><%= friendship_request.to_user_id %></td>
+        <td><%= link_to 'Show', friendship_request %></td>
+        <td><%= link_to 'Edit', edit_friendship_request_path(friendship_request) %></td>
+        <td><%= link_to 'Destroy', friendship_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

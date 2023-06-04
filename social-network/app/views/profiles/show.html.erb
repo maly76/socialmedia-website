@@ -1,0 +1,38 @@
+<br>
+<br>
+<div class="p-16 bg-surface-secondary">
+    <div class="row">
+        <div class="col-lg-4 mx-auto">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center"> 
+                        <a href="#" class="avatar avatar-xl rounded-circle">
+                        <%= image_tag(@profile.imageurl, :size => "260x260", :class => "rounded-circle mt-5") %>
+                        </a> 
+                    </div>
+                    <div class="text-center my-6">
+                        <a href="#" class="d-block h5 mb-0"><%= @profile.fullname %></a>
+                        <span class="d-block text-sm text-muted"><%= @profile.user.email %></span> 
+                    </div>
+                    <div class="d-flex">
+                        <div class="col-6 text-center"> <a href="<%= user_posts_url(@profile.user, @profile) %>" class="h4 font-bolder mb-0"><%= @profile.user.posts.length %></a> <span class="d-block text-sm">Beiträge</span> </div>
+                        <div class="col-6 text-center"> <a class="h4 font-bolder mb-0"><%= @profile.user.friendships.length %></a> <span class="d-block text-sm">Freunde</span> </div>
+                    </div>
+                    <% if is_requested(@profile.user) %>
+                        <div class="d-flex justify-content-center">
+                        <%= link_to 'Angefragt',
+                            delete_friendship_request(@profile.user),
+                            method: :delete,
+                            :class => 'btn btn-danger' %>
+
+                        </div>
+                    <% elsif !is_friend(@profile.user) %>
+                        <div class="d-flex justify-content-center">
+                        <%= button_to "Hinzufügen", friendship_requests_url(user_id: @profile.user), remote: true, :class => 'btn btn-primary' %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comments</h1>
+
+<% @comments.each do |comment| %>
+  <div class="card">
+    <div class="card-header">
+      <% if current_user == comment.user || current_user == comment.post.user %>
+        <ul class="nav card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Löschen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Bearbeiten</a>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= comment.user.username %></h5>
+      <p class="card-text"><%= comment.body %></p>
+      <a href="#" class="btn btn-primary">Löschen</a>
+    </div>
+  </div>
+  <td><%= link_to 'Edit', edit_post_comment_path(@post, comment) %></td>
+  <td><%= link_to 'Destroy Comment', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+
+
+<%= link_to 'New Comment', new_post_comment_path(@post) %>
+<br>
+

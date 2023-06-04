@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<nav class="navbar navbar-light bg-light">
+  <h1 class="navbar-brand page-title">Beiträge</h1>
+  <% if @is_creator %>
+    <a href="<%= new_user_post_path(current_user) %>" class="btn btn-primary active btn-block" role="button" aria-pressed="true">Neuer Beitrag</a>
+  <% end %>
+</nav>
+
+<% unless @posts.any? %>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Zurzeit keine Beiträge</h5>
+      <% if @is_creator %>
+        <p class="card-text">Jetzt den ersten Beitrag veröffentlichen</p>
+        <a href="<%= new_user_post_path(current_user) %>" class="btn btn-primary">Beitrag erstellen</a>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% @posts.each do |post| %>
+  <div class="card mx-auto">
+    <div class="card-header">
+      <p class="text-muted"><%= post.created_at %></p>
+      <h5 class="card-title"><%= post.user.username %></h5>
+      <% if current_user == post.user %>
+        <ul class="nav card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="<%= user_post_url(current_user, post) %>">Löschen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= edit_user_post_path(current_user, post) %>">Bearbeiten</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">kommentare deaktivieren</a>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= post.title %></h5>
+      <p class="card-text"><%= post.body %></p>
+    </div>
+    <div class="card-footer">
+      <a href="#" class="btn btn-primary">like</a>
+      <a href="<%= user_post_url(@user, post) %>" class="btn btn-primary">Kommentare</a>
+    </div>
+  </div>
+  <br>
+<% end %>
